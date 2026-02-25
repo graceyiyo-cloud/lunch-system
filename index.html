@@ -467,7 +467,7 @@
             const monthVal = document.getElementById('monthSelect').value;
             let monthStr = "XX"; if (monthVal) { const parts = monthVal.split('-'); monthStr = parseInt(parts[1], 10).toString(); }
             let txt = `${monthStr}月的午餐錢~Line pay或是匯款都可喔\n(不要ipass money)\n\n↓匯款帳號↓\n京城銀行 總行營業部\n054\n001280705711`;
-            navigator.clipboard.writeText(txt).then(() => { alert("已複製！"); });
+            navigator.clipboard.writeText(txt); // 已移除提示視窗
         };
 
         document.getElementById('copyImgBtn').onclick = () => {
@@ -476,7 +476,7 @@
             document.getElementById('page1').classList.add('capturing');
             html2canvas(area, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
-                    navigator.clipboard.write([new ClipboardItem({"image/png": blob})]).then(() => { alert("圖片已複製！"); });
+                    navigator.clipboard.write([new ClipboardItem({"image/png": blob})]); // 已移除提示視窗
                 });
                 title.style.display = 'none'; document.getElementById('page1').classList.remove('capturing');
             });
@@ -561,7 +561,7 @@
             const b = (t, d) => d.total === 0 ? '' : `${t}\n` + (d['3F']>0?`3F：${d['3F']}\n`:'') + (d['1F']>0?`1F：${d['1F']}\n`:'');
             const txt = b("午餐", currentStats2.lunch) + b("飲料", currentStats2.drink) + `\n3F總計：${currentStats2.lunch['3F'] + currentStats2.drink['3F']}\n\n$$月結`;
             document.getElementById('hiddenCopyArea2').value = txt; document.getElementById('hiddenCopyArea2').select();
-            document.execCommand('copy'); alert("複製成功");
+            document.execCommand('copy'); // 已移除提示視窗
         }
 
         function handleClear2() { document.getElementById('orderInput2').value = ''; document.getElementById('resultArea2').classList.add('hidden'); }
