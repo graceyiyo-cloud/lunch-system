@@ -65,7 +65,6 @@
         #page1 .price-input { width: 70px; text-align: right; border: 1px solid #DDD; border-radius: 4px; padding: 5px; color: #B05B5B; }
         #page1.capturing .price-input { display: none !important; }
         #page1.capturing .price-text { display: inline !important; font-weight: bold; color: #B05B5B; }
-        /* 差異標示樣式 */
         .diff-warning { color: #d93025; font-size: 12px; margin-right: 4px; vertical-align: middle; cursor: help; }
 
         /* --- 網頁二：每日金額 CSS (原始保留) --- */
@@ -303,7 +302,6 @@
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('page'+p).classList.add('active');
             document.querySelectorAll('.nav-btn')[p-1].classList.add('active');
-            // 如果切換到第一頁，重新渲染以比對最新歷史紀錄
             if(p === 1) render();
         }
 
@@ -421,16 +419,12 @@
         
         function buildDailyTable() {
             const body = document.getElementById('dailyBody'); body.innerHTML = '';
-            // 讀取網頁二的歷史紀錄進行比對
             const history = JSON.parse(localStorage.getItem('mealTracker_art_v2') || '[]');
-            
             Object.keys(dailyStats).sort().forEach(d => {
                 const displayDate = d.replace(/-/g,'/');
-                // 在歷史紀錄中尋找對應日期的金額
                 const historyEntry = history.find(h => h.date === displayDate);
                 const hasDiff = historyEntry && historyEntry.amount !== dailyStats[d];
                 const warningTag = hasDiff ? `<span class="diff-warning" title="與每日金額紀錄不符 (紀錄為 ${historyEntry.amount.toLocaleString()})">⚠️</span>` : '';
-
                 body.innerHTML += `<tr><td>${displayDate}</td><td id="daily-sum-${d}" style="text-align:right;">${warningTag}${dailyStats[d].toLocaleString()}</td></tr>`;
             });
         }
@@ -462,11 +456,7 @@
 
         document.getElementById('copyBtn').onclick = () => {
             const monthVal = document.getElementById('monthSelect').value;
-            let monthStr = "XX";
-            if (monthVal) {
-                const parts = monthVal.split('-');
-                monthStr = parseInt(parts[1], 10).toString();
-            }
+            let monthStr = "XX"; if (monthVal) { const parts = monthVal.split('-'); monthStr = parseInt(parts[1], 10).toString(); }
             let txt = `${monthStr}月的午餐錢~Line pay或是匯款都可喔\n(不要ipass money)\n\n↓匯款帳號↓\n京城銀行 總行營業部\n054\n001280705711`;
             navigator.clipboard.writeText(txt).then(() => { alert("已複製！"); });
         };
@@ -526,13 +516,35 @@
 
         function renderHistory2() {
             const m = document.getElementById('monthFilter2').value;
-            const filtered = historyData2.filter(i => i.month === m);
+            const filtered = historyData2.filter(i => i.month === m).sort((a, b) => a.date.localeCompare(b.date));
             document.getElementById('monthTotalDisplay2').textContent = filtered.reduce((s,i)=>s+i.amount, 0).toLocaleString() + " 元";
             document.getElementById('historyList2').innerHTML = filtered.map(i => `
-                <div class="journal-box p-3 flex justify-between">
+                <div class="journal-box p-3 flex justify-between items-center">
                     <span class="text-xs text-stone-400">${i.date}</span>
-                    <span style="font-weight: normal;">${i.amount.toLocaleString()}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-stone-400">$</span>
+                        <input type="text" onchange="editAmount2(${i.id}, this.value)" value="${i.amount.toLocaleString()}" class="bg-transparent outline-none w-24 text-right" style="font-weight: normal;">
+                        <button onclick="deleteRecord2(${i.id})" class="text-stone-300 hover:text-stone-500">✕</button>
+                    </div>
                 </div>`).join('');
+        }
+
+        function editAmount2(id, val) {
+            const idx = historyData2.findIndex(i => i.id === id);
+            if (idx > -1) {
+                const numeric = parseInt(val.replace(/,/g, '')) || 0;
+                historyData2[idx].amount = numeric;
+                localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2));
+                renderHistory2();
+            }
+        }
+
+        function deleteRecord2(id) {
+            if (confirm("是否移除此紀錄？")) {
+                historyData2 = historyData2.filter(i => i.id !== id);
+                localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2));
+                updateMonthSelector2(); renderHistory2();
+            }
         }
 
         function handleCopy2() {
