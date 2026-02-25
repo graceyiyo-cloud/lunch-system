@@ -54,6 +54,7 @@
         #page1 .scroll-area { overflow-y: auto; border: 1px solid #F5F5F5; border-radius: 4px; max-height: 400px; }
         #page1 table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         #page1 th, #page1 td { text-align: left; padding: 12px 15px; border-bottom: 1px solid #F0F0F0; }
+        #page1 #summaryTable th:nth-child(2), #page1 #summaryTable td:nth-child(2), #page1 #dailyTable th:nth-child(2), #page1 #dailyTable td:nth-child(2) { text-align: right; }
         #page1 th { background-color: #E0E5DF; color: #333; position: sticky; top: 0; z-index: 10; font-weight: 700; }
         #page1 .excluded-header-row { background-color: #F7F7F7; color: #777; font-size: 13px; text-align: center; padding: 8px; }
         #page1 .excluded-row { background-color: #FCFCFC; color: #AAA; }
@@ -64,6 +65,8 @@
         #page1 .price-input { width: 70px; text-align: right; border: 1px solid #DDD; border-radius: 4px; padding: 5px; color: #B05B5B; }
         #page1.capturing .price-input { display: none !important; }
         #page1.capturing .price-text { display: inline !important; font-weight: bold; color: #B05B5B; }
+        /* 差異標示樣式 */
+        .diff-warning { color: #d93025; font-size: 12px; margin-right: 4px; vertical-align: middle; cursor: help; }
 
         /* --- 網頁二：每日金額 CSS (原始保留) --- */
         #page2 { background-color: #fdfbf7; font-family: 'Noto Sans TC', sans-serif; color: #57534e; padding: 20px; }
@@ -300,6 +303,8 @@
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('page'+p).classList.add('active');
             document.querySelectorAll('.nav-btn')[p-1].classList.add('active');
+            // 如果切換到第一頁，重新渲染以比對最新歷史紀錄
+            if(p === 1) render();
         }
 
         // --- 網頁一 JS (月結統計) ---
@@ -334,9 +339,9 @@
         function updateMonthDropdown(preSelected) {
             const matches = rawFileText.match(/\d{4}\.\d{2}\.\d{2}/g);
             if(matches) {
-                const months = [...new Set(matches.map(d => d.substring(0, 7)))].sort().reverse();
+                const months = [...new Set(matches.map(d => d.substring(0, 7).replace(/\./g, '-')))].sort().reverse();
                 const select = document.getElementById('monthSelect');
-                select.innerHTML = months.map(m => `<option value="${m}">${m}月</option>`).join('');
+                select.innerHTML = months.map(m => `<option value="${m}">${m.replace(/-/g, '.')}月</option>`).join('');
                 if (preSelected && months.includes(preSelected)) select.value = preSelected;
             }
         }
@@ -364,7 +369,7 @@
             const dateRegex = /^(\d{4}\.\d{2}\.\d{2})/; let datePositions = []; nonMonthlyDates = [];
             lines.forEach((line, idx) => { const m = line.match(dateRegex); if (m) datePositions.push({ idx, date: m[1].replace(/\./g, '-') }); });
             datePositions.forEach((pos, i) => {
-                if (!pos.date.startsWith(targetMonth.replace('.','-'))) return;
+                if (!pos.date.startsWith(targetMonth)) return;
                 const nextIdx = datePositions[i+1] ? datePositions[i+1].idx : lines.length;
                 const dayLines = lines.slice(pos.idx, nextIdx);
                 if (dayLines.some(l => l.includes("$$月結")) || forceIncludeDates.has(pos.date.replace(/-/g, '.'))) {
@@ -413,10 +418,20 @@
 
         function toggleUser(name) { if (excludedUsers.has(name)) excludedUsers.delete(name); else excludedUsers.add(name); buildTable(); saveToLocalStorage(); }
         function selectUser(name) { currentSelectedUser = name; updateDetail(name); }
+        
         function buildDailyTable() {
             const body = document.getElementById('dailyBody'); body.innerHTML = '';
+            // 讀取網頁二的歷史紀錄進行比對
+            const history = JSON.parse(localStorage.getItem('mealTracker_art_v2') || '[]');
+            
             Object.keys(dailyStats).sort().forEach(d => {
-                body.innerHTML += `<tr><td>${d.replace(/-/g,'/')}</td><td id="daily-sum-${d}" style="font-weight:bold;">${dailyStats[d].toLocaleString()}</td></tr>`;
+                const displayDate = d.replace(/-/g,'/');
+                // 在歷史紀錄中尋找對應日期的金額
+                const historyEntry = history.find(h => h.date === displayDate);
+                const hasDiff = historyEntry && historyEntry.amount !== dailyStats[d];
+                const warningTag = hasDiff ? `<span class="diff-warning" title="與每日金額紀錄不符 (紀錄為 ${historyEntry.amount.toLocaleString()})">⚠️</span>` : '';
+
+                body.innerHTML += `<tr><td>${displayDate}</td><td id="daily-sum-${d}" style="text-align:right;">${warningTag}${dailyStats[d].toLocaleString()}</td></tr>`;
             });
         }
 
@@ -436,7 +451,7 @@
         function handlePriceChange(name, idx, val, el) {
             val = parseInt(val) || 0; const old = personalStats[name].details[idx].price; const date = personalStats[name].details[idx].date;
             personalStats[name].details[idx].price = val; personalStats[name].total += (val - old);
-            dailyStats[date] += (val - old); buildTable(); updateDetail(name);
+            dailyStats[date] += (val - old); buildTable(); buildDailyTable(); updateDetail(name);
         }
 
         function renderNonMonthly() {
@@ -446,8 +461,12 @@
         }
 
         document.getElementById('copyBtn').onclick = () => {
-            const month = document.getElementById('monthSelect').value;
-            let monthStr = month ? parseInt(month.split('-')[1]) : "XX";
+            const monthVal = document.getElementById('monthSelect').value;
+            let monthStr = "XX";
+            if (monthVal) {
+                const parts = monthVal.split('-');
+                monthStr = parseInt(parts[1], 10).toString();
+            }
             let txt = `${monthStr}月的午餐錢~Line pay或是匯款都可喔\n(不要ipass money)\n\n↓匯款帳號↓\n京城銀行 總行營業部\n054\n001280705711`;
             navigator.clipboard.writeText(txt).then(() => { alert("已複製！"); });
         };
@@ -512,7 +531,7 @@
             document.getElementById('historyList2').innerHTML = filtered.map(i => `
                 <div class="journal-box p-3 flex justify-between">
                     <span class="text-xs text-stone-400">${i.date}</span>
-                    <span class="font-bold">${i.amount.toLocaleString()}</span>
+                    <span style="font-weight: normal;">${i.amount.toLocaleString()}</span>
                 </div>`).join('');
         }
 
