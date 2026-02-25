@@ -9,32 +9,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 全域導覽樣式 --- */
+        /* --- 全域導覽樣式 (修改為浮動樣式) --- */
         .app-nav {
-            background: #455A64;
-            padding: 10px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            position: sticky;
-            top: 0;
+            flex-direction: column;
+            gap: 12px;
             z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .nav-btn {
-            padding: 8px 20px;
-            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            background: #455A64;
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 30px;
             cursor: pointer;
             font-size: 14px;
             transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            white-space: nowrap;
+            text-align: center;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
         .nav-btn.active {
-            background: white;
-            color: #455A64;
+            background: #7A918D;
+            color: white;
             font-weight: bold;
+            border: 2px solid white;
         }
         .page-container {
             display: none;
@@ -44,7 +50,7 @@
         }
 
         /* --- 網頁一：月結統計 CSS (原始保留) --- */
-        #page1 { font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif; background: #F2F0EB; padding: 20px; letter-spacing: 0.05em; }
+        #page1 { font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif; background: #F2F0EB; padding: 20px; letter-spacing: 0.05em; padding-bottom: 100px; }
         #page1 .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         #page1 h1 { text-align: center; color: #455A64; font-weight: normal; margin-bottom: 30px; }
         #page1 .control-panel { display: flex; gap: 20px; background: #E8E6E1; padding: 20px; border-radius: 8px; margin-bottom: 25px; align-items: center; color: #444; }
@@ -62,13 +68,15 @@
         #page1 .btn { border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; color: white; font-size: 13px; display: none; }
         #page1 #copyBtn { background-color: #7A918D; }
         #page1 #copyImgBtn { background-color: #6B7C8A; }
+        /* 修正按鈕黏在一起的問題 */
+        #page1 .btn-group { display: flex; gap: 10px; }
         #page1 .price-input { width: 70px; text-align: right; border: 1px solid #DDD; border-radius: 4px; padding: 5px; color: #B05B5B; }
         #page1.capturing .price-input { display: none !important; }
         #page1.capturing .price-text { display: inline !important; font-weight: bold; color: #B05B5B; }
         .diff-warning { color: #d93025; font-size: 12px; margin-right: 4px; vertical-align: middle; cursor: help; }
 
         /* --- 網頁二：每日金額 CSS (原始保留) --- */
-        #page2 { background-color: #fdfbf7; font-family: 'Noto Sans TC', sans-serif; color: #57534e; padding: 20px; }
+        #page2 { background-color: #fdfbf7; font-family: 'Noto Sans TC', sans-serif; color: #57534e; padding: 20px; padding-bottom: 100px; }
         #page2 .journal-box { background: #fff; border: 1px solid #e7e5e4; border-radius: 6px; }
 
         /* --- 網頁三：統計助手 CSS (文青風) --- */
@@ -78,6 +86,7 @@
             color: #57534e;
             padding: 20px;
             min-height: 100vh;
+            padding-bottom: 100px;
         }
         #page3 .container {
             background: #fff;
