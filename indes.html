@@ -69,39 +69,100 @@
         #page2 { background-color: #fdfbf7; font-family: 'Noto Sans TC', sans-serif; color: #57534e; padding: 20px; }
         #page2 .journal-box { background: #fff; border: 1px solid #e7e5e4; border-radius: 6px; }
 
-        /* --- 網頁三：明細助手 CSS (原始保留) --- */
+        /* --- 網頁三：統計助手 CSS (文青風) --- */
         #page3 {
-            --primary-color: #3498db; --primary-hover: #2980b9; --success-color: #27ae60; --success-hover: #219150;
-            --danger-color: #e74c3c; --gray-color: #95a5a6; --gray-hover: #7f8c8d; --bg-color: #f4f7f9;
-            --card-bg: #ffffff; --text-color: #2c3e50; --border-color: #e0e6ed; --hint-bg: #e7f3ff; --hint-border: #b3d7ff; --hint-text: #0056b3;
-            background-color: var(--bg-color); color: var(--text-color); font-family: "Microsoft JhengHei", sans-serif; padding: 20px;
+            background-color: #fdfbf7;
+            font-family: 'Noto Sans TC', "Microsoft JhengHei", sans-serif;
+            color: #57534e;
+            padding: 20px;
+            min-height: 100vh;
         }
-        #page3 .container { background: var(--card-bg); padding: 20px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); max-width: 488px; margin: 0 auto; }
-        #page3 h2 { text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.4rem; }
-        #page3 .hint { background-color: var(--hint-bg); border: 1px solid var(--hint-border); color: var(--hint-text); font-size: 13px; padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; }
-        #page3 .hint span { display: block; position: relative; padding-left: 18px; }
-        #page3 .hint span::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
-        #page3 textarea { width: 100%; height: 160px; padding: 12px; border: 2px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; box-sizing: border-box; resize: vertical; }
-        #page3 .btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        #page3 button { flex: 1; min-width: 100px; padding: 10px 5px; border-radius: 8px; font-size: 13px; font-weight: bold; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 4px; }
-        #page3 .process-btn { background-color: var(--primary-color); color: white; }
-        #page3 .copy-btn { background-color: var(--success-color); color: white; }
-        #page3 .clear-btn { background-color: var(--gray-color); color: white; }
-        #page3 #resultTable { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; font-size: 14px; }
-        #page3 #resultTable th { background-color: #f8f9fa; padding: 10px 12px; border-bottom: 2px solid #eee; }
-        #page3 #resultTable td { padding: 10px 12px; border-bottom: 1px solid #f1f1f1; cursor: grab; position: relative; }
-        #page3 .check-cell { cursor: pointer; font-size: 22px; color: #cbd5e0; }
-        #page3 .row-checked { color: var(--gray-color) !important; }
+        #page3 .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e7e5e4;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        #page3 h2 {
+            text-align: center;
+            letter-spacing: 0.2em;
+            color: #444;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+        #page3 .hint {
+            background-color: #f8f6f2;
+            border-left: 2px solid #78716c;
+            color: #8c8681;
+            font-size: 13px;
+            padding: 15px;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        #page3 textarea {
+            width: 100%;
+            height: 160px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #e7e5e4;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #57534e;
+            outline: none;
+            transition: border 0.3s;
+        }
+        #page3 textarea:focus { border-color: #a8a29e; }
+        #page3 .btn-group { display: flex; gap: 10px; margin-bottom: 25px; }
+        #page3 button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        #page3 .process-btn { background-color: #78716c; color: #fff; }
+        #page3 .copy-btn { background-color: #a8a29e; color: #fff; }
+        #page3 .clear-btn { background-color: transparent; color: #a8a29e; border: 1px solid #e7e5e4; }
+        #page3 #resultTable { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        #page3 #resultTable th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e7e5e4;
+            color: #a8a29e;
+            font-weight: 400;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        #page3 #resultTable td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #f5f5f4;
+            color: #57534e;
+            font-size: 15px;
+        }
+        #page3 .check-cell { cursor: pointer; font-size: 18px; color: #e7e5e4; }
+        #page3 .row-checked td { color: #d6d3d1 !important; }
         #page3 .row-checked td:nth-child(2) { text-decoration: line-through; }
-        #page3 .drop-merge { background-color: #fff3e0 !important; outline: 2px solid #ff9800; }
-        #page3 .drop-before { border-top: 3px solid var(--primary-color) !important; }
-        #page3 .drop-after { border-bottom: 3px solid var(--primary-color) !important; }
-        #page3 .summary-box { background: #fdf9f2; border-left: 5px solid #f1c40f; padding: 15px; border-radius: 8px; }
-        #page3 .total-price { color: var(--danger-color); font-size: 20px; }
-        #page3 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; }
-        #page3 .modal-content { background: white; padding: 25px; border-radius: 12px; width: 85%; max-width: 300px; text-align: center; }
-        #page3 .msg-box { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 10px 20px; border-radius: 50px; display: none; z-index: 3000; }
-        #page3 .star-mark { color: var(--danger-color); font-weight: bold; margin-left: 4px; }
+        #page3 .row-checked .check-cell { color: #78716c; }
+        #page3 .drop-merge { background-color: #f5f5f4 !important; outline: 1px dashed #78716c; }
+        #page3 .drop-before { border-top: 2px solid #78716c !important; }
+        #page3 .drop-after { border-bottom: 2px solid #78716c !important; }
+        #page3 .summary-box {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e7e5e4;
+        }
+        #page3 .total-price { color: #57534e; font-size: 24px; font-weight: 300; }
+        #page3 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 2000; align-items: center; justify-content: center; }
+        #page3 .modal-content { background: #fff; padding: 40px; border: 1px solid #e7e5e4; border-radius: 4px; width: 320px; text-align: center; }
+        #page3 .msg-box { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #78716c; color: white; padding: 10px 30px; border-radius: 4px; display: none; z-index: 3000; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -109,7 +170,7 @@
     <nav class="app-nav">
         <button class="nav-btn active" onclick="switchPage(1)">1. 月結統計</button>
         <button class="nav-btn" onclick="switchPage(2)">2. 每日金額</button>
-        <button class="nav-btn" onclick="switchPage(3)">3. 明細助手</button>
+        <button class="nav-btn" onclick="switchPage(3)">3. 統計助手</button>
     </nav>
 
     <div id="page1" class="page-container active">
@@ -191,23 +252,43 @@
         <div id="toast3" class="msg-box"></div>
         <div id="mainModal3" class="modal">
             <div class="modal-content">
-                <p id="modalMsg3" style="margin-top: 0;">訊息內容</p>
-                <div id="priceInputArea3" style="display: none;"><p style="font-size: 13px; color: #666;">請確認或修改單價：</p><input type="number" id="customPrice3" class="modal-input" style="width: 80%; padding: 10px; border: 2px solid #ddd; border-radius: 6px; text-align: center; margin-bottom: 20px;"></div>
-                <div class="modal-btns" style="display: flex; gap: 10px;"><button class="process-btn" id="modalYes3" style="flex:1; padding: 10px; background: #3498db; color: white; border-radius: 8px;">確定合併</button><button class="clear-btn" id="modalNo3" style="flex:1; padding: 10px; background: #95a5a6; color: white; border-radius: 8px;">取消</button></div>
+                <p id="modalMsg3" style="color:#78716c; margin-bottom:20px;">訊息內容</p>
+                <div id="priceInputArea3" style="display: none;">
+                    <input type="number" id="customPrice3" style="width:100%; padding:10px; border:1px solid #e7e5e4; text-align:center; margin-bottom:20px; outline:none;">
+                </div>
+                <div class="modal-btns" style="display:flex; gap:10px;">
+                    <button onclick="confirmMerge3()" style="flex:1; background:#78716c; color:white; padding:10px; border-radius:2px;">確定</button>
+                    <button onclick="closeModal3()" style="flex:1; background:white; color:#a8a29e; border:1px solid #e7e5e4; padding:10px; border-radius:2px;">取消</button>
+                </div>
             </div>
         </div>
         <div class="container">
-            <h2>🍱 訂單明細統計助手 🍱</h2>
-            <div class="hint"><span>格式：姓名-餐點 價格</span><span>相同名稱但價格不同時會標註 *</span><span><b>拖拉</b>品項可進行 <b>合併</b> 或 <b>排序</b></span></div>
-            <textarea id="inputData3" placeholder="請輸入訂單..."></textarea>
-            <div class="btn-group">
-                <button class="process-btn" onclick="processOrder3()">🚀 開始統計</button>
-                <button class="copy-btn" onclick="copyResult3()">📋 複製結果</button>
-                <button class="clear-btn" onclick="clearContent3()">🗑️ 清除</button>
+            <h2>．統計助手．</h2>
+            <div class="hint">
+                ．格式：姓名-餐點 價格．<br>
+                ．相同名稱但價格不同時會標註 *．<br>
+                ．拖拉品項可進行 合併 或 排序．
             </div>
-            <div id="resultArea3" style="display:none; margin-top: 20px;">
-                <table id="resultTable"><thead><tr><th>✔</th><th>品項與備註</th><th>數量</th></tr></thead><tbody id="resultBody3"></tbody></table>
-                <div class="summary-box" style="margin-top:15px;"><div style="display:flex; justify-content:space-between; font-weight:bold;"><span>總份數：</span><span id="totalQty3">0 份</span></div><div style="display:flex; justify-content:space-between; font-weight:bold; font-size: 20px; color: #e74c3c;"><span>應收總金額：</span><span id="totalAmount3">$0</span></div></div>
+            <textarea id="inputData3" placeholder="在此輸入訂單內容..."></textarea>
+            <div class="btn-group">
+                <button class="process-btn" onclick="processOrder3()">開始統計</button>
+                <button class="copy-btn" onclick="copyResult3()">複製結果</button>
+                <button class="clear-btn" onclick="clearContent3()">清空</button>
+            </div>
+            <div id="resultArea3" style="display:none;">
+                <table id="resultTable">
+                    <thead><tr><th width="40">✔</th><th>品項</th><th width="60">份數</th></tr></thead>
+                    <tbody id="resultBody3"></tbody>
+                </table>
+                <div class="summary-box">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:14px; color:#a8a29e;">
+                        <span>總份數</span><span id="totalQty3">0 份</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                        <span style="font-size:14px; color:#a8a29e;">應收總額</span>
+                        <span id="totalAmount3" class="total-price">0</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -261,12 +342,10 @@
         }
 
         function extractDayData(lines) {
-            const dayData = {}; let mode = "meal";
+            const dayData = {};
             lines.forEach(line => {
                 let t = line.trim();
-                if (t === "---" || t.includes("飲料")) { mode = "drink"; return; }
-                if (t === "午餐") { mode = "meal"; return; }
-                if (!t || t.includes("$$月結") || t.includes("結單")) return;
+                if (!t || t.includes("$$月結") || t.includes("結單") || t === "---" || t === "午餐" || t.includes("飲料")) return;
                 const nameMatch = t.match(/^([^\d\s\-:：]{2,8})\s*[-:：]{1,2}(.*)$/);
                 if (nameMatch) {
                     let name = nameMatch[1].trim().replace(/^\$/, ''); if (name === "小計") return;
@@ -447,8 +526,8 @@
 
         function handleClear2() { document.getElementById('orderInput2').value = ''; document.getElementById('resultArea2').classList.add('hidden'); }
 
-        // --- 網頁三 JS (明細助手) ---
-        let currentSummary3 = []; let dragSrcIdx3 = null;
+        // --- 網頁三 JS (統計助手) ---
+        let currentSummary3 = []; let dragSrcIdx3 = null; let mergeTargetIdx3 = null;
 
         function processOrder3() {
             const raw = document.getElementById('inputData3').value.trim(); if (!raw) return;
@@ -471,7 +550,7 @@
             currentSummary3.forEach((item, idx) => {
                 const tr = document.createElement('tr'); tr.draggable = true;
                 if (item.checked) tr.classList.add('row-checked');
-                tr.innerHTML = `<td class="check-cell" onclick="currentSummary3[${idx}].checked=!currentSummary3[${idx}].checked;renderDisplay3();">${item.checked?'☑':'☐'}</td><td>${item.name}</td><td>${item.qty}</td>`;
+                tr.innerHTML = `<td class="check-cell" onclick="currentSummary3[${idx}].checked=!currentSummary3[${idx}].checked;renderDisplay3();">${item.checked?'●':'○'}</td><td>${item.name}</td><td>${item.qty}</td>`;
                 tr.addEventListener('dragstart', () => { dragSrcIdx3 = idx; });
                 tr.addEventListener('dragover', e => {
                     e.preventDefault(); const rect = tr.getBoundingClientRect();
@@ -481,33 +560,44 @@
                     else if (rel > rect.height * 0.7) tr.classList.add('drop-after');
                     else tr.classList.add('drop-merge');
                 });
+                tr.addEventListener('dragleave', () => tr.classList.remove('drop-before', 'drop-after', 'drop-merge'));
                 tr.addEventListener('drop', () => {
-                    const src = currentSummary3[dragSrcIdx3];
-                    const target = currentSummary3[idx];
-                    const modal = document.getElementById('mainModal3');
-                    if (document.querySelector('.drop-merge')) {
-                        document.getElementById('modalMsg3').textContent = `將「${src.name}」合併至「${target.name}」？`;
-                        modal.style.display = 'flex';
-                        document.getElementById('modalYes3').onclick = () => {
-                            target.qty += src.qty; currentSummary3.splice(dragSrcIdx3, 1);
-                            modal.style.display = 'none'; renderDisplay3();
-                        };
-                        document.getElementById('modalNo3').onclick = () => modal.style.display = 'none';
+                    const isMerge = tr.classList.contains('drop-merge');
+                    tr.classList.remove('drop-before', 'drop-after', 'drop-merge');
+                    if (isMerge) {
+                        if(dragSrcIdx3 === idx) return;
+                        mergeTargetIdx3 = idx;
+                        const src = currentSummary3[dragSrcIdx3], tar = currentSummary3[idx];
+                        document.getElementById('modalMsg3').textContent = `將「${src.name}」併入「${tar.name}」？`;
+                        document.getElementById('mainModal3').style.display = 'flex';
                     } else {
-                        currentSummary3.splice(dragSrcIdx3, 1);
-                        currentSummary3.splice(idx, 0, src); renderDisplay3();
+                        const item = currentSummary3.splice(dragSrcIdx3, 1)[0];
+                        currentSummary3.splice(idx, 0, item); renderDisplay3();
                     }
                 });
                 body.appendChild(tr); tq += item.qty; ta += (item.qty * item.price);
             });
             document.getElementById('totalQty3').textContent = tq + " 份";
-            document.getElementById('totalAmount3').textContent = "$" + ta.toLocaleString();
+            document.getElementById('totalAmount3').textContent = ta.toLocaleString();
             document.getElementById('resultArea3').style.display = 'block';
         }
 
+        function confirmMerge3() {
+            const src = currentSummary3[dragSrcIdx3];
+            currentSummary3[mergeTargetIdx3].qty += src.qty;
+            currentSummary3.splice(dragSrcIdx3, 1);
+            closeModal3(); renderDisplay3();
+        }
+
+        function closeModal3() { document.getElementById('mainModal3').style.display = 'none'; }
+
         function copyResult3() {
-            const txt = "【訂單結果】\n" + currentSummary3.map(i => `${i.name} * ${i.qty}`).join('\n');
-            navigator.clipboard.writeText(txt).then(() => alert("結果已複製！"));
+            const txt = currentSummary3.map(i => `${i.name} * ${i.qty}`).join('\n') + `\n\n總份數：${document.getElementById('totalQty3').textContent}\n總金額：${document.getElementById('totalAmount3').textContent}`;
+            navigator.clipboard.writeText(txt).then(() => {
+                const toast = document.getElementById('toast3');
+                toast.textContent = "已複製結果"; toast.style.display = "block";
+                setTimeout(() => toast.style.display = "none", 2000);
+            });
         }
         function clearContent3() { document.getElementById('inputData3').value = ''; document.getElementById('resultArea3').style.display = 'none'; }
     </script>
