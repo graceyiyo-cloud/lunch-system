@@ -457,8 +457,10 @@
             document.getElementById('copyBtn').style.display = document.getElementById('copyImgBtn').style.display = 'inline-block';
             const box = document.getElementById('personalDetail');
             box.innerHTML = stats.details.sort((a,b)=>a.date.localeCompare(b.date)).map((d,i) => `
-                <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eee;">
-                    <span style="font-size:14px;">${d.date.substring(5).replace('-','/')}：${d.text}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #eee;">
+                    <div style="flex:1; display:flex; align-items:center;">
+                        <span style="font-size:14px; margin-top:-2px;">${d.date.substring(5).replace('-','/')}：${d.text}</span>
+                    </div>
                     <input type="number" class="price-input" value="${d.price}" oninput="handlePriceChange('${name}', ${i}, this.value, this)">
                     <span class="price-text" style="display:none;">${d.price}</span>
                 </div>
