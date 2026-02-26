@@ -216,6 +216,14 @@
                     <div id="captureArea" style="background: white; padding: 15px; border-radius: 6px;">
                         <h4 id="imgTitle" style="margin: 0 0 15px 0; display:none; border-bottom: 2px solid #8FA39D; padding-bottom: 8px; font-size: 18px; color: #333;"></h4>
                         <div id="personalDetail"></div>
+                        <div id="imgFooter" style="display:none; margin-top:25px; padding:15px; background-color:#F4F7F6; border-radius:8px; border:1px solid #E0EAE8;">
+                            <div style="transform: translateY(-5px); font-size:13px; color:#546E7A; line-height:1.6;">
+                                <div style="font-weight:bold; color:#455A64; margin-bottom:4px;">2月的午餐錢~Line pay或是匯款都可以~</div>
+                                <div style="margin-bottom:10px;">(不要ipass money)</div>
+                                <div style="font-size:11px; color:#90A4AE; letter-spacing:0.1em; border-top:1px solid #DCE6E5; padding-top:8px;">↓匯款帳號↓</div>
+                                <div style="font-family:monospace; font-size:14px; color:#37474F;">京城銀行 總行營業部 (054)<br>001280705711</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -477,9 +485,15 @@
         };
 
         document.getElementById('copyImgBtn').onclick = function() {
-            const area = document.getElementById('captureArea'); const title = document.getElementById('imgTitle');
+            const area = document.getElementById('captureArea'); 
+            const title = document.getElementById('imgTitle');
+            const footer = document.getElementById('imgFooter');
             const btn = this;
-            title.style.display = 'block'; title.textContent = `【${currentSelectedUser} 餐費明細】`;
+            
+            title.style.display = 'block'; 
+            title.textContent = `【${currentSelectedUser} 餐費明細】`;
+            footer.style.display = 'block'; 
+
             document.getElementById('page1').classList.add('capturing');
             html2canvas(area, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
@@ -487,7 +501,9 @@
                         buttonFeedback(btn, "🖼️ 複製圖片");
                     });
                 });
-                title.style.display = 'none'; document.getElementById('page1').classList.remove('capturing');
+                title.style.display = 'none'; 
+                footer.style.display = 'none'; 
+                document.getElementById('page1').classList.remove('capturing');
             });
         };
 
