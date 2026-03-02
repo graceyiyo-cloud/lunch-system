@@ -386,7 +386,7 @@
                         <div id="personalDetail"></div>
                         <div id="imgFooter" style="display:none; margin-top:25px; padding:15px; background-color:#F4F7F6; border-radius:8px; border:1px solid #E0EAE8;">
                             <div style="transform: translateY(-5px); font-size:13px; color:#546E7A; line-height:1.6;">
-                                <div style="font-weight:bold; color:#455A64; margin-bottom:4px;">2月的午餐錢~Line pay或是匯款都可以~</div>
+                                <div id="imgFooterMonthText" style="font-weight:bold; color:#455A64; margin-bottom:4px;">2月的午餐錢~Line pay或是匯款都可以~</div>
                                 <div style="margin-bottom:10px;">(不要ipass money)</div>
                                 <div style="font-size:11px; color:#90A4AE; letter-spacing:0.1em; border-top:1px solid #DCE6E5; padding-top:8px;">↓匯款帳號↓</div>
                                 <div style="font-family:monospace; font-size:14px; color:#37474F;">京城銀行 總行營業部 (054)<br>001280705711</div>
@@ -651,9 +651,20 @@
             } else el.style.display = 'none';
         }
 
+        // 修改：獲取當前選中的月份名稱
+        function getCurrentMonthLabel() {
+            const select = document.getElementById('monthSelect');
+            if (select && select.value) {
+                // 從 "2026-03" 提取出 "3"
+                const parts = select.value.split('-');
+                return parseInt(parts[1], 10).toString();
+            }
+            // 備援方案：當前系統月份
+            return (new Date().getMonth() + 1).toString();
+        }
+
         document.getElementById('copyBtn').onclick = function() {
-            const monthVal = document.getElementById('monthSelect').value;
-            let monthStr = "XX"; if (monthVal) { const parts = monthVal.split('-'); monthStr = parseInt(parts[1], 10).toString(); }
+            const monthStr = getCurrentMonthLabel();
             let txt = `${monthStr}月的午餐錢~Line pay或是匯款都可喔\n(不要ipass money)\n\n↓匯款帳號↓\n京城銀行 總行營業部\n054\n001280705711`;
             navigator.clipboard.writeText(txt).then(() => { buttonFeedback(this, "📋 複製文字"); });
         };
@@ -662,11 +673,18 @@
             const area = document.getElementById('captureArea'); 
             const title = document.getElementById('imgTitle');
             const footer = document.getElementById('imgFooter');
+            const footerMonthText = document.getElementById('imgFooterMonthText');
             const btn = this;
+            
+            // 更新圖片中的月份內容
+            const monthStr = getCurrentMonthLabel();
+            footerMonthText.textContent = `${monthStr}月的午餐錢~Line pay或是匯款都可以~`;
+            
             title.style.display = 'block'; 
             title.textContent = `【${currentSelectedUser} 餐費明細】`;
             footer.style.display = 'block'; 
             document.getElementById('page1').classList.add('capturing');
+            
             html2canvas(area, { scale: 2 }).then(canvas => {
                 canvas.toBlob(blob => {
                     navigator.clipboard.write([new ClipboardItem({"image/png": blob})]).then(() => {
