@@ -991,10 +991,11 @@
 
         function copyResult() {
             if (currentSummary.length === 0) return;
-            let copyText = "【 訂單統計結果 】\n\n";
+            let copyText = ""; // 移除標題，直接開始品項列表
             currentSummary.forEach(item => {
                 const starText = item.isMinor ? "*" : "";
-                copyText += `· ${item.name}${starText} (x${item.qty})\n`;
+                // 修改格式為：· 品項名稱 x數量
+                copyText += `· ${item.name}${starText} x${item.qty}\n`;
             });
             copyText += `\n總份數：${document.getElementById('totalQty').innerText}\n`;
             copyText += `總金額：${document.getElementById('totalAmount').innerText}`;
