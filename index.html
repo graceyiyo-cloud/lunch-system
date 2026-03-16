@@ -74,143 +74,13 @@
         /* --- 網頁二：每日金額 CSS (原始保留) --- */
         #page2 { background-color: #fdfbf7; font-family: 'Noto Sans TC', sans-serif; color: #57534e; padding: 20px; padding-bottom: 100px; }
         #page2 .journal-box { background: #fff; border: 1px solid #e7e5e4; border-radius: 6px; }
-
-        /* --- 網頁三：統計助手 CSS (套用深色質感版變數) --- */
-        #page3 {
-            --p3-primary: #3a6351;
-            --p3-primary-hover: #2a4a3c;
-            --p3-success: #6a9c89;
-            --p3-danger: #c94c4c;
-            --p3-gray: #7d8597;
-            --p3-bg: #e5e9e7;
-            --p3-hint-bg: #f0f4f2;
-            --p3-hint-border: #c8d6cf;
-            --p3-hint-text: #2d4f3f;
-            
-            background-color: var(--p3-bg);
-            font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
-            color: #24292e;
-            padding: 10px 15px 100px;
-            min-height: 100vh;
-        }
-        #page3 .container {
-            background: #ffffff;
-            padding: 25px 22px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(58, 99, 81, 0.15);
-            max-width: 488px;
-            margin: 0 auto;
-        }
-        #page3 .header-area { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; position: relative; }
-        #page3 h2 { text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.4rem; color: var(--p3-primary); font-weight: 800; letter-spacing: 1px; }
-        #page3 .help-toggle-btn { background: none; border: none; color: var(--p3-gray); cursor: pointer; padding: 5px; transition: all 0.2s; display: flex; align-items: center; margin-left: 8px; }
-        #page3 .help-toggle-btn:hover, #page3 .help-toggle-btn.active { color: var(--p3-primary); }
-        #page3 .lucide { width: 20px; height: 20px; stroke-width: 2.5px; }
-        
-        #page3 .hint { background-color: var(--p3-hint-bg); border: 1px solid var(--p3-hint-border); color: var(--p3-hint-text); font-size: 13px; padding: 15px; border-radius: 12px; margin-bottom: 20px; display: none; animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        #page3 .hint span { display: block; position: relative; padding-left: 20px; margin-bottom: 4px; }
-        #page3 .hint span::before { content: "◆"; position: absolute; left: 0; font-size: 10px; top: 2px; }
-
-        #page3 .mode-selector { display: flex; background: #dfe4e2; padding: 4px; border-radius: 12px; margin-bottom: 20px; font-size: 14px; }
-        #page3 .mode-selector label { flex: 1; text-align: center; padding: 10px; cursor: pointer; border-radius: 9px; transition: all 0.3s; }
-        #page3 .mode-selector input { display: none; }
-        #page3 .mode-selector input:checked + span { background: white; display: block; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); font-weight: bold; color: var(--p3-primary); }
-
-        #page3 textarea { width: 100%; height: 180px; padding: 15px; border: 2px solid #cbd5e0; border-radius: 14px; font-size: 14px; margin-bottom: 20px; box-sizing: border-box; background-color: #f8faf9; transition: all 0.3s; }
-        #page3 textarea:focus { outline: none; border-color: var(--p3-primary); background-color: #fff; box-shadow: 0 0 0 4px rgba(58, 99, 81, 0.1); }
-
-        #page3 .btn-group { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; }
-        #page3 button.main-btn { flex: 1; min-width: 100px; padding: 12px 10px; border: none; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 700; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        #page3 button.main-btn:active { transform: scale(0.96); }
-        #page3 .process-btn { background-color: var(--p3-primary); color: white; box-shadow: 0 4px 12px rgba(58, 99, 81, 0.25); }
-        #page3 .copy-btn { background-color: var(--p3-success); color: white; }
-        #page3 .clear-btn { background-color: var(--p3-gray); color: white; }
-
-        #page3 .category-block { margin-bottom: 35px; }
-        #page3 .category-title { font-size: 14px; font-weight: 800; color: var(--p3-primary); background: #f1f4f3; padding: 4px 12px; border-radius: 6px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 6px; }
-        #page3 .table-header-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        #page3 .cat-mode-switch { display: flex; background: #dfe4e2; padding: 2px; border-radius: 20px; font-size: 11px; }
-        #page3 .cat-mode-switch label { padding: 2px 8px; cursor: pointer; border-radius: 18px; color: #718096; }
-        #page3 .cat-mode-switch input { display: none; }
-        #page3 .cat-mode-switch input:checked + span { background: var(--p3-primary); color: white; padding: 2px 8px; border-radius: 18px; display: block; font-weight: bold; }
-
-        /* 重設勾選按鈕樣式優化 */
-        #page3 .reset-check-btn {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
-            color: var(--p3-gray);
-            background: #f8faf9;
-            border: 1px solid #cbd5e0;
-            padding: 4px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-        }
-        #page3 .reset-check-btn:hover {
-            background: #ffffff;
-            color: var(--p3-primary);
-            border-color: var(--p3-primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        #page3 .reset-check-btn .lucide {
-            width: 12px;
-            height: 12px;
-            stroke-width: 3px;
-        }
-
-        #page3 .result-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 15px; background: #fff; border-radius: 12px; overflow: hidden; font-size: 14px; table-layout: fixed; border: 1px solid #cbd5e0; }
-        #page3 .result-table th { background-color: #f1f4f3; color: #4a5568; padding: 8px; border-bottom: 2px solid #cbd5e0; font-weight: 700; }
-        #page3 .result-table td { padding: 6px 8px; border-bottom: 1px solid #edf2f0; vertical-align: middle; word-break: break-all; cursor: grab; }
-        #page3 .result-table th:nth-child(1), #page3 .result-table td:nth-child(1) { width: 45px; text-align: center; }
-        #page3 .result-table th:nth-child(3), #page3 .result-table td:nth-child(3) { width: 55px; text-align: center; font-weight: 800; }
-
-        #page3 .check-cell { cursor: pointer; color: #cbd5e0; display: flex; align-items: center; justify-content: center; min-height: 24px; }
-        #page3 .row-checked { background-color: #f7f9f8 !important; }
-        #page3 .row-checked td { color: #a0aec0 !important; }
-        #page3 .row-checked .check-cell { color: var(--p3-success); }
-        #page3 .row-checked td:nth-child(2) { text-decoration: line-through; opacity: 0.7; }
-
-        #page3 .drop-before td { border-top: 4px solid var(--p3-primary) !important; }
-        #page3 .drop-after td { border-bottom: 4px solid var(--p3-primary) !important; }
-        #page3 .dragging { opacity: 0.5; background-color: #edf2f1; }
-        #page3 .drop-merge { background-color: #fffaf0 !important; outline: 2px solid #ed8936; z-index: 10; }
-
-        #page3 .summary-box { background: #f8faf9; border: 1px solid #dce4e1; border-left: 6px solid var(--p3-primary); padding: 12px 15px; border-radius: 10px; margin-top: 10px; }
-        #page3 .summary-line { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 4px; color: #4a5568; }
-        #page3 .total-price { color: var(--danger-color); font-size: 18px; font-weight: 900; }
-
-        /* 通用彈窗與訊息 */
-        .p3-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 39, 35, 0.6); backdrop-filter: blur(3px); z-index: 9999; align-items: center; justify-content: center; }
-        .p3-modal-content { background: white; padding: 30px; border-radius: 20px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .p3-msg-box { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: #2d3748; color: white; padding: 12px 28px; border-radius: 50px; display: none; z-index: 9999; font-size: 14px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
-    <div id="p3-toast" class="p3-msg-box"></div>
-
-    <div id="p3-mainModal" class="p3-modal">
-        <div class="p3-modal-content">
-            <p id="p3-modalMsg" style="margin-top: 0; font-weight: 700;">訊息內容</p>
-            <div id="p3-priceInputArea" style="display: none;">
-                <p style="font-size: 13px; color: #718096;">請確認或修改合併後的單價：</p>
-                <input type="number" id="p3-customPrice" style="width:100%; padding:10px; margin:15px 0; border:2px solid #cbd5e0; border-radius:10px; text-align:center;" placeholder="金額">
-            </div>
-            <div style="display: flex; gap: 12px;">
-                <button class="nav-btn" style="flex:1; background: #3a6351;" id="p3-modalYes">確定合併</button>
-                <button class="nav-btn" style="flex:1; background: #7d8597;" id="p3-modalNo">取消</button>
-            </div>
-        </div>
-    </div>
-
     <nav class="app-nav">
         <button class="nav-btn active" onclick="switchPage(1)">1. 月結統計</button>
         <button class="nav-btn" onclick="switchPage(2)">2. 每日金額</button>
-        <button class="nav-btn" onclick="switchPage(3)">3. 統計助手</button>
     </nav>
 
     <!-- 網頁一：月結統計 -->
@@ -298,46 +168,6 @@
         <textarea id="hiddenCopyArea2" class="absolute -top-full opacity-0" readonly></textarea>
     </div>
 
-    <!-- 網頁三：統計助手 -->
-    <div id="page3" class="page-container">
-        <div class="container">
-            <div class="header-area">
-                <h2><i data-lucide="shield-check"></i> 訂單明細統計助手 <i data-lucide="shield-check"></i></h2>
-                <button class="help-toggle-btn" onclick="toggleP3Hint()" title="顯示幫助">
-                    <i data-lucide="help-circle"></i>
-                </button>
-            </div>
-
-            <div class="hint" id="p3-hintBox">
-                <span><b>標準模式：</b>自動拆分「+」號，將複數品項分開統計。</span>
-                <span><b>套餐模式：</b>完整保留整行品項名稱（不拆分）。</span>
-                <span><b>分區統計：</b>支援同時貼入午餐、飲料等分類，系統將自動分區統計（自動過濾樓層資訊）。</span>
-                <span><b>互動操作：</b>可針對各分類獨立切換模式，拖拉品項可合併或排序。</span>
-            </div>
-
-            <div class="mode-selector">
-                <label><input type="radio" name="p3-calcMode" value="split" checked><span>標準模式</span></label>
-                <label><input type="radio" name="p3-calcMode" value="combo"><span>套餐模式</span></label>
-            </div>
-
-            <textarea id="p3-inputData" placeholder="請輸入訂單內容，例如：
-午餐
-王小明-排骨飯 100
-飲料
-李大華-四季春 30"></textarea>
-
-            <div class="btn-group">
-                <button class="main-btn process-btn" onclick="p3_processOrder()"><i data-lucide="rocket"></i> 開始統計</button>
-                <button class="main-btn copy-btn" onclick="p3_copyResult()"><i data-lucide="copy"></i> 複製結果</button>
-                <button class="main-btn clear-btn" onclick="p3_clearContent()"><i data-lucide="trash-2"></i> 清除</button>
-            </div>
-
-            <div id="p3-resultArea" style="display:none;">
-                <div id="p3-categoryContainer"></div>
-            </div>
-        </div>
-    </div>
-
     <script>
         // 通用切換邏輯
         function switchPage(p) {
@@ -346,7 +176,6 @@
             document.getElementById('page'+p).classList.add('active');
             document.querySelectorAll('.nav-btn')[p-1].classList.add('active');
             if(p === 1) render();
-            if(p === 3) lucide.createIcons();
         }
 
         function buttonFeedback(btn, originalText) {
@@ -354,7 +183,7 @@
             setTimeout(() => { btn.textContent = originalText; }, 1500);
         }
 
-        /* --- 網頁一 JS (月結統計) 保持不變 --- */
+        /* --- 網頁一 JS (月結統計) --- */
         let rawFileText = ""; let forceIncludeDates = new Set(); let excludedUsers = new Set();
         let personalStats = {}; let dailyStats = {}; let nonMonthlyDates = []; let currentSelectedUser = null;
 
@@ -530,7 +359,7 @@
             });
         };
 
-        /* --- 網頁二 JS (每日金額) 保持不變 --- */
+        /* --- 網頁二 JS (每日金額) --- */
         let currentStats2 = null; let historyData2 = JSON.parse(localStorage.getItem('mealTracker_art_v2') || '[]');
         function handleCalculate2() {
             const raw = document.getElementById('orderInput2').value.trim(); if (!raw) return;
@@ -546,7 +375,16 @@
         }
         function renderUI2() {
             document.getElementById('resultArea2').classList.remove('hidden');
-            const gen = (d, t) => d.total === 0 ? '' : `<div class="text-xs text-stone-400 mb-1 border-b pb-1">${t}</div>` + (d['3F']>0 ? `<div class="flex justify-between"><span>3F</span><span>${d['3F'].toLocaleString()}</span></div>` : '') + (d['1F']>0 ? `<div class="flex justify-between"><span>1F</span><span>${d['1F'].toLocaleString()}</span></div>` : '');
+            const gen = (d, t) => {
+                if (d.total === 0) return '';
+                let html = `<div class="text-xs text-stone-400 mb-1 border-b pb-1">${t}</div>`;
+                if (d['3F'] > 0) html += `<div class="flex justify-between"><span>3F</span><span>${d['3F'].toLocaleString()}</span></div>`;
+                if (d['1F'] > 0) html += `<div class="flex justify-between"><span>1F</span><span>${d['1F'].toLocaleString()}</span></div>`;
+                if (d['3F'] > 0 && d['1F'] > 0) {
+                    html += `<div class="flex justify-between border-t border-stone-100 mt-1 pt-1 font-medium text-stone-600"><span class="text-[10px] opacity-70">└ ${t}小計</span><span>${d.total.toLocaleString()}</span></div>`;
+                }
+                return html;
+            };
             document.getElementById('lunchResults2').innerHTML = gen(currentStats2.lunch, '午餐');
             document.getElementById('drinkResults2').innerHTML = gen(currentStats2.drink, '飲料');
             const f1 = currentStats2.lunch['1F'] + currentStats2.drink['1F']; const f3 = currentStats2.lunch['3F'] + currentStats2.drink['3F'];
@@ -577,237 +415,39 @@
             if (idx > -1) { historyData2[idx].amount = parseInt(val.replace(/,/g, '')) || 0; localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2)); renderHistory2(); }
         }
         function deleteRecord2(id) { if (confirm("是否移除此紀錄？")) { historyData2 = historyData2.filter(i => i.id !== id); localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2)); updateMonthSelector2(); renderHistory2(); } }
+        
         function handleCopy2() {
             if (!currentStats2) return;
-            const b = (t, d) => d.total === 0 ? '' : `${t}\n` + (d['3F']>0?`3F：${d['3F']}\n`:'') + (d['1F']>0?`1F：${d['1F']}\n`:'');
-            const txt = b("午餐", currentStats2.lunch) + b("飲料", currentStats2.drink) + `\n3F總計：${currentStats2.lunch['3F'] + currentStats2.drink['3F']}\n\n$$月結`;
-            document.getElementById('hiddenCopyArea2').value = txt; document.getElementById('hiddenCopyArea2').select();
-            document.execCommand('copy'); buttonFeedback(document.getElementById('copyBtn2_real'), "複製結果");
+            const b = (t, d) => {
+                if (d.total === 0) return '';
+                let res = `${t}\n`;
+                if (d['3F'] > 0) res += `3F：${d['3F']}\n`;
+                if (d['1F'] > 0) res += `1F：${d['1F']}\n`;
+                if (d['3F'] > 0 && d['1F'] > 0) res += `小計：${d.total}\n`;
+                return res.trim();
+            };
+
+            let contentArray = [];
+            const lunch = b("午餐", currentStats2.lunch);
+            if (lunch) contentArray.push(lunch);
+            
+            const drink = b("飲料", currentStats2.drink);
+            if (drink) contentArray.push(drink);
+            
+            const total3F = currentStats2.lunch['3F'] + currentStats2.drink['3F'];
+            
+            let finalTxt = contentArray.join('\n\n---\n\n');
+            if (contentArray.length > 0) {
+                finalTxt += '\n\n---\n\n';
+            }
+            finalTxt += `3F總計：${total3F}\n\n$$月結`;
+
+            document.getElementById('hiddenCopyArea2').value = finalTxt; 
+            document.getElementById('hiddenCopyArea2').select();
+            document.execCommand('copy'); 
+            buttonFeedback(document.getElementById('copyBtn2_real'), "複製結果");
         }
         function handleClear2() { document.getElementById('orderInput2').value = ''; document.getElementById('resultArea2').classList.add('hidden'); }
-
-        /* --- 網頁三 JS (統計助手邏輯) --- */
-        let categoryData = []; 
-        let dragSrcInfo = null;
-        let currentDropTargetInfo = null;
-        let dropAction = null; 
-
-        function p3_showMessage(text) {
-            const toast = document.getElementById('p3-toast');
-            toast.innerText = text;
-            toast.style.display = 'block';
-            setTimeout(() => { toast.style.display = 'none'; }, 2000);
-        }
-
-        function toggleP3Hint() {
-            const hintBox = document.getElementById('p3-hintBox');
-            const btn = document.querySelector('#page3 .help-toggle-btn');
-            const isHidden = window.getComputedStyle(hintBox).display === 'none';
-            hintBox.style.display = isHidden ? 'block' : 'none';
-            isHidden ? btn.classList.add('active') : btn.classList.remove('active');
-        }
-
-        function p3_parseLinesToItems(lines, mode) {
-            const summaryObj = {};
-            lines.forEach(line => {
-                let trimmed = line.trim();
-                if (trimmed.includes('=')) trimmed = trimmed.split('=')[0].trim();
-                const parts = trimmed.split('-');
-                const content = parts.slice(1).join('-').trim();
-                const rawItems = (mode === 'combo') ? [content] : content.split('+');
-                rawItems.forEach(rawItem => {
-                    const subItem = rawItem.trim();
-                    const match = subItem.match(/^(.*?)(\d+)\s*元?$/);
-                    if (match) {
-                        let detail = match[1].trim(); 
-                        const price = parseInt(match[2], 10);
-                        detail = detail.replace(/([^\s])(無糖|微糖|一分糖|二分糖|三分糖|半糖|少糖|七分糖|去冰|微冰|少冰|多冰|正常|熱)/g, '$1 $2').replace(/\s+/g, ' ').trim();
-                        const key = `${detail}_${price}`;
-                        if (!summaryObj[key]) summaryObj[key] = { name: detail, qty: 0, price: price, isMinor: false, checked: false };
-                        summaryObj[key].qty += 1;
-                    }
-                });
-            });
-            return Object.values(summaryObj).sort((a, b) => a.name.localeCompare(b.name, 'zh-Hant'));
-        }
-
-        function p3_processOrder() {
-            const input = document.getElementById('p3-inputData').value.trim();
-            if (!input) return;
-            const lines = input.split('\n');
-            const defaultMode = document.querySelector('input[name="p3-calcMode"]:checked').value;
-            const tempCategoryMap = new Map();
-            let currentCatName = "一般品項";
-
-            lines.forEach(line => {
-                let trimmed = line.trim();
-                if (!trimmed || trimmed.startsWith('---')) return;
-                if (!trimmed.includes('-')) {
-                    if (trimmed.match(/^\d+[fF樓]$/) || trimmed.length <= 1 || trimmed.includes('結單')) return;
-                    currentCatName = trimmed;
-                    return;
-                }
-                if (!tempCategoryMap.has(currentCatName)) tempCategoryMap.set(currentCatName, []);
-                tempCategoryMap.get(currentCatName).push(trimmed);
-            });
-
-            categoryData = Array.from(tempCategoryMap).map(([name, rawLines]) => ({
-                catName: name, mode: defaultMode, rawLines, items: p3_parseLinesToItems(rawLines, defaultMode)
-            }));
-            p3_checkAllMinorItems();
-            p3_renderDisplay();
-        }
-
-        function p3_changeCatMode(catIdx, newMode) {
-            const cat = categoryData[catIdx];
-            cat.mode = newMode;
-            cat.items = p3_parseLinesToItems(cat.rawLines, newMode);
-            p3_checkAllMinorItems();
-            p3_renderDisplay();
-        }
-
-        function p3_checkAllMinorItems() {
-            categoryData.forEach(cat => {
-                cat.items.forEach(item => item.isMinor = false);
-                const nameGroups = {};
-                cat.items.forEach(item => {
-                    const cleanName = item.name.replace(/\s+/g, ''); 
-                    if (!nameGroups[cleanName]) nameGroups[cleanName] = [];
-                    nameGroups[cleanName].push(item);
-                });
-                Object.values(nameGroups).forEach(group => {
-                    if (group.length > 1) {
-                        group.sort((a, b) => (b.qty !== a.qty) ? (b.qty - a.qty) : (a.price - b.price));
-                        for (let i = 1; i < group.length; i++) group[i].isMinor = true;
-                    }
-                });
-            });
-        }
-
-        function p3_renderDisplay() {
-            const container = document.getElementById('p3-categoryContainer');
-            container.innerHTML = "";
-            categoryData.forEach((cat, catIdx) => {
-                let catQty = 0, catAmount = 0;
-                const block = document.createElement('div');
-                block.className = "category-block";
-                block.innerHTML = `
-                    <div class="category-title"><i data-lucide="tag"></i> ${cat.catName}</div>
-                    <div class="table-header-tools">
-                        <div class="cat-mode-switch">
-                            <label onclick="p3_changeCatMode(${catIdx}, 'split')"><input type="radio" name="p3-m-${catIdx}" ${cat.mode === 'split' ? 'checked' : ''}><span>標準</span></label>
-                            <label onclick="p3_changeCatMode(${catIdx}, 'combo')"><input type="radio" name="p3-m-${catIdx}" ${cat.mode === 'combo' ? 'checked' : ''}><span>套餐</span></label>
-                        </div>
-                        <button class="reset-check-btn" onclick="p3_resetCatChecks(${catIdx})"><i data-lucide="refresh-cw"></i> 重設勾選</button>
-                    </div>
-                    <table class="result-table">
-                        <thead><tr><th><i data-lucide="check-circle"></i></th><th>品項與備註</th><th>數量</th></tr></thead>
-                        <tbody id="p3-tbody-${catIdx}"></tbody>
-                    </table>
-                    <div class="summary-box">
-                        <div class="summary-line"><span>份數統計</span><span id="p3-qty-${catIdx}">0 份</span></div>
-                        <div class="summary-line" style="margin-top: 5px; padding-top: 5px; border-top: 1px dashed #cbd5e0;">
-                            <span>分類金額</span><span id="p3-amt-${catIdx}" class="total-price">$0</span>
-                        </div>
-                    </div>`;
-                const tbody = block.querySelector(`#p3-tbody-${catIdx}`);
-                cat.items.forEach((item, itemIdx) => {
-                    const tr = document.createElement('tr');
-                    tr.draggable = true; tr.dataset.catIdx = catIdx; tr.dataset.itemIdx = itemIdx;
-                    if (item.checked) tr.classList.add('row-checked');
-                    const starHtml = item.isMinor ? '<span class="p3-star-mark" style="color:#c94c4c; font-weight:bold; margin-left:5px;">*</span>' : '';
-                    tr.innerHTML = `
-                        <td><div class="check-cell" onclick="p3_toggleCheck(${catIdx}, ${itemIdx}, event)"><i data-lucide="${item.checked ? 'check-circle' : 'circle'}"></i></div></td>
-                        <td>${item.name}${starHtml}</td>
-                        <td>${item.qty}</td>`;
-                    tr.addEventListener('dragstart', p3_handleDragStart);
-                    tr.addEventListener('dragover', p3_handleDragOver);
-                    tr.addEventListener('dragleave', p3_handleDragLeave);
-                    tr.addEventListener('drop', p3_handleDrop);
-                    tr.addEventListener('dragend', p3_handleDragEnd);
-                    tbody.appendChild(tr);
-                    catQty += item.qty; catAmount += (item.qty * item.price);
-                });
-                block.querySelector(`#p3-qty-${catIdx}`).innerText = `${catQty} 份`;
-                block.querySelector(`#p3-amt-${catIdx}`).innerText = `$${catAmount.toLocaleString()}`;
-                container.appendChild(block);
-            });
-            document.getElementById('p3-resultArea').style.display = 'block';
-            lucide.createIcons();
-        }
-
-        function p3_toggleCheck(catIdx, itemIdx, event) {
-            event.stopPropagation();
-            categoryData[catIdx].items[itemIdx].checked = !categoryData[catIdx].items[itemIdx].checked;
-            p3_renderDisplay();
-        }
-
-        function p3_resetCatChecks(catIdx) { categoryData[catIdx].items.forEach(i => i.checked = false); p3_renderDisplay(); }
-
-        function p3_handleDragStart(e) { dragSrcInfo = { catIdx: parseInt(this.dataset.catIdx), itemIdx: parseInt(this.dataset.itemIdx) }; this.classList.add('dragging'); }
-        function p3_handleDragOver(e) {
-            e.preventDefault();
-            const targetCatIdx = parseInt(this.dataset.catIdx);
-            const targetItemIdx = parseInt(this.dataset.itemIdx);
-            if (targetCatIdx !== dragSrcInfo.catIdx || targetItemIdx === dragSrcInfo.itemIdx) return;
-            const rect = this.getBoundingClientRect();
-            const relY = e.clientY - rect.top;
-            this.classList.remove('drop-before', 'drop-after', 'drop-merge');
-            if (relY < rect.height * 0.3) { this.classList.add('drop-before'); dropAction = 'before'; }
-            else if (relY > rect.height * 0.7) { this.classList.add('drop-after'); dropAction = 'after'; }
-            else { this.classList.add('drop-merge'); dropAction = 'merge'; }
-            currentDropTargetInfo = { catIdx: targetCatIdx, itemIdx: targetItemIdx };
-        }
-        function p3_handleDragLeave() { this.classList.remove('drop-before', 'drop-after', 'drop-merge'); }
-        function p3_handleDrop(e) {
-            e.stopPropagation();
-            if (!currentDropTargetInfo || dragSrcInfo.catIdx !== currentDropTargetInfo.catIdx) return;
-            const cat = categoryData[dragSrcInfo.catIdx];
-            if (dropAction === 'merge') { p3_triggerMerge(dragSrcInfo, currentDropTargetInfo); }
-            else { const item = cat.items.splice(dragSrcInfo.itemIdx, 1)[0]; cat.items.splice(currentDropTargetInfo.itemIdx, 0, item); p3_renderDisplay(); }
-        }
-        function p3_handleDragEnd() { document.querySelectorAll('#page3 .result-table tr').forEach(r => r.classList.remove('dragging', 'drop-before', 'drop-after', 'drop-merge')); }
-
-        function p3_triggerMerge(src, target) {
-            const cat = categoryData[src.catIdx];
-            const srcItem = cat.items[src.itemIdx];
-            const targetItem = cat.items[target.itemIdx];
-            const modal = document.getElementById('p3-mainModal');
-            const priceArea = document.getElementById('p3-priceInputArea');
-            const priceInput = document.getElementById('p3-customPrice');
-            priceArea.style.display = (srcItem.price !== targetItem.price) ? 'block' : 'none';
-            if (srcItem.price !== targetItem.price) {
-                document.getElementById('p3-modalMsg').innerHTML = `⚠️ 單價不同！使用哪個金額？<br><small>${srcItem.name}($${srcItem.price}) / ${targetItem.name}($${targetItem.price})</small>`;
-                priceInput.value = targetItem.price;
-            } else { document.getElementById('p3-modalMsg').innerText = `將「${srcItem.name}」併入「${targetItem.name}」？`; }
-            modal.style.display = 'flex';
-            document.getElementById('p3-modalYes').onclick = () => {
-                if (srcItem.price !== targetItem.price) targetItem.price = parseInt(priceInput.value) || targetItem.price;
-                targetItem.qty += srcItem.qty; cat.items.splice(src.itemIdx, 1);
-                p3_checkAllMinorItems(); modal.style.display = 'none'; p3_renderDisplay(); p3_showMessage("品項已合併");
-            };
-            document.getElementById('p3-modalNo').onclick = () => modal.style.display = 'none';
-        }
-
-        function p3_copyResult() {
-            if (categoryData.length === 0) return;
-            let blocks = [];
-            categoryData.forEach(cat => {
-                let catQty = 0, catAmount = 0, itemLines = [];
-                cat.items.forEach(item => {
-                    itemLines.push(`${item.name}${item.isMinor ? "*" : ""} * ${item.qty}`);
-                    catQty += item.qty; catAmount += (item.qty * item.price);
-                });
-                blocks.push(`${itemLines.join('\n')}\n\n份數：${catQty} 份\n金額：$${catAmount.toLocaleString()}`);
-            });
-            const finalCopyText = blocks.join('\n\n----------------\n\n');
-            const el = document.createElement('textarea');
-            el.value = finalCopyText; document.body.appendChild(el); el.select();
-            try { document.execCommand('copy'); p3_showMessage("統計結果已複製！"); } catch (err) { p3_showMessage("複製失敗"); }
-            document.body.removeChild(el);
-        }
-
-        function p3_clearContent() { document.getElementById('p3-inputData').value = ""; document.getElementById('p3-resultArea').style.display = 'none'; categoryData = []; }
     </script>
 </body>
 </html>
