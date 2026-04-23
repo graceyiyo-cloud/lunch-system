@@ -83,7 +83,6 @@
         <button class="nav-btn" onclick="switchPage(2)">2. 每日金額</button>
     </nav>
 
-    <!-- 網頁一：月結統計 -->
     <div id="page1" class="page-container active">
         <div class="container">
             <h1>月結餐點費用統計</h1>
@@ -130,7 +129,6 @@
         </div>
     </div>
 
-    <!-- 網頁二：每日金額 -->
     <div id="page2" class="page-container">
         <div class="max-w-md mx-auto py-10">
             <header class="mb-8 text-center"><h1 class="text-2xl font-normal tracking-[0.15em] text-stone-700 mb-3">．每日訂餐金額紀錄．</h1><div class="w-8 h-px bg-stone-300 mx-auto"></div></header>
@@ -175,7 +173,7 @@
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('page'+p).classList.add('active');
             document.querySelectorAll('.nav-btn')[p-1].classList.add('active');
-            if(p === 1) render();
+            if(p === 1) { render(); buildDailyTable(); }
         }
 
         function buttonFeedback(btn, originalText) {
@@ -408,13 +406,44 @@
             const m = document.getElementById('monthFilter2').value;
             const filtered = historyData2.filter(i => i.month === m).sort((a, b) => a.date.localeCompare(b.date));
             document.getElementById('monthTotalDisplay2').textContent = filtered.reduce((s,i)=>s+i.amount, 0).toLocaleString() + " 元";
-            document.getElementById('historyList2').innerHTML = filtered.map(i => `<div class="journal-box p-3 flex justify-between items-center"><span class="text-xs text-stone-400">${i.date}</span><div class="flex items-center gap-2"><span class="text-xs text-stone-400">$</span><input type="text" onchange="editAmount2(${i.id}, this.value)" value="${i.amount.toLocaleString()}" class="bg-transparent outline-none w-24 text-right"><button onclick="deleteRecord2(${i.id})" class="text-stone-300 hover:text-stone-500">✕</button></div></div>`).join('');
+            document.getElementById('historyList2').innerHTML = filtered.map(i => `
+                <div class="journal-box p-3 flex justify-between items-center">
+                    <input type="text" onchange="editDate2(${i.id}, this.value)" value="${i.date}" class="bg-transparent outline-none w-24 text-xs text-stone-400">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-stone-400">$</span>
+                        <input type="text" onchange="editAmount2(${i.id}, this.value)" value="${i.amount.toLocaleString()}" class="bg-transparent outline-none w-20 text-right text-stone-600 text-xs">
+                        <button onclick="deleteRecord2(${i.id})" class="text-stone-300 hover:text-stone-500">✕</button>
+                    </div>
+                </div>`).join('');
+        }
+        function editDate2(id, val) {
+            const idx = historyData2.findIndex(i => i.id === id);
+            if (idx > -1) {
+                const newDate = val.trim();
+                // 檢查基本格式 YYYY/MM/DD
+                if (/^\d{4}\/\d{2}\/\d{2}$/.test(newDate)) {
+                    historyData2[idx].date = newDate;
+                    historyData2[idx].month = newDate.substring(0, 7);
+                    localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2));
+                    updateMonthSelector2();
+                    renderHistory2();
+                    if (document.getElementById('page1').classList.contains('active') || true) buildDailyTable();
+                } else {
+                    alert("日期格式應為 YYYY/MM/DD");
+                    renderHistory2();
+                }
+            }
         }
         function editAmount2(id, val) {
             const idx = historyData2.findIndex(i => i.id === id);
-            if (idx > -1) { historyData2[idx].amount = parseInt(val.replace(/,/g, '')) || 0; localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2)); renderHistory2(); }
+            if (idx > -1) { 
+                historyData2[idx].amount = parseInt(val.replace(/,/g, '')) || 0; 
+                localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2)); 
+                renderHistory2(); 
+                buildDailyTable();
+            }
         }
-        function deleteRecord2(id) { if (confirm("是否移除此紀錄？")) { historyData2 = historyData2.filter(i => i.id !== id); localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2)); updateMonthSelector2(); renderHistory2(); } }
+        function deleteRecord2(id) { if (confirm("是否移除此紀錄？")) { historyData2 = historyData2.filter(i => i.id !== id); localStorage.setItem('mealTracker_art_v2', JSON.stringify(historyData2)); updateMonthSelector2(); renderHistory2(); buildDailyTable(); } }
         
         function handleCopy2() {
             if (!currentStats2) return;
