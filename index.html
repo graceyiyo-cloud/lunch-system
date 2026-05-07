@@ -46,11 +46,11 @@
         .page-container { display: none; }
         .page-container.active { display: block; }
 
-        /* --- 網頁一：每日金額 CSS (原 page2 改 page1) --- */
+        /* --- 網頁一：每日金額 CSS --- */
         #page1 { background-color: #fdfbf7; font-family: 'Noto Sans TC', sans-serif; color: #57534e; padding: 20px; padding-bottom: 100px; }
         #page1 .journal-box { background: #fff; border: 1px solid #e7e5e4; border-radius: 6px; }
 
-        /* --- 網頁二：月結統計 CSS (原 page1 改 page2) --- */
+        /* --- 網頁二：月結統計 CSS --- */
         #page2 { font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif; background: #F2F0EB; padding: 20px; letter-spacing: 0.05em; padding-bottom: 100px; }
         #page2 .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         #page2 h1 { text-align: center; color: #455A64; font-weight: normal; margin-bottom: 30px; }
@@ -84,9 +84,9 @@
     </nav>
 
     <div id="page1" class="page-container active">
-        <div class="max-w-md mx-auto py-6">
-            <header class="mb-4 text-center">
-                <h1 class="text-2xl font-normal tracking-[0.15em] text-stone-700 mb-3">．每日訂餐金額紀錄．</h1>
+        <div class="max-w-md mx-auto pt-2 pb-6">
+            <header class="mb-2 text-center">
+                <h1 class="text-2xl font-normal tracking-[0.15em] text-stone-700 mb-1">．每日訂餐金額紀錄．</h1>
                 <div class="w-8 h-px bg-stone-300 mx-auto"></div>
             </header>
             <div class="space-y-6">
@@ -176,7 +176,6 @@
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('page'+p).classList.add('active');
             document.querySelectorAll('.nav-btn')[p-1].classList.add('active');
-            // 月結統計改為在 page2
             if(p === 2) { render(); buildDailyTable(); }
         }
 
@@ -185,7 +184,7 @@
             setTimeout(() => { btn.textContent = originalText; }, 1500);
         }
 
-        /* --- 網頁二 JS (原網頁一：月結統計) --- */
+        /* --- 網頁二 JS (月結統計) --- */
         let rawFileText = ""; let forceIncludeDates = new Set(); let excludedUsers = new Set();
         let personalStats = {}; let dailyStats = {}; let nonMonthlyDates = []; let currentSelectedUser = null;
 
@@ -361,7 +360,7 @@
             });
         };
 
-        /* --- 網頁一 JS (原網頁二：每日金額) --- */
+        /* --- 網頁一 JS (每日金額) --- */
         let currentStats2 = null; let historyData2 = JSON.parse(localStorage.getItem('mealTracker_art_v2') || '[]');
         function handleCalculate2() {
             const raw = document.getElementById('orderInput2').value.trim(); if (!raw) return;
